@@ -3,6 +3,7 @@ package com.inventarium.controllers;
 import com.inventarium.dtos.ProductRequest;
 import com.inventarium.dtos.ProductResponse;
 import com.inventarium.models.Product;
+import com.inventarium.models.ProductBST;
 import com.inventarium.services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -131,5 +132,38 @@ public class ProductController {
             .map(ProductResponse::new)
             .collect(Collectors.toList());
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/ordenar-bst")
+    public ResponseEntity<List<ProductResponse>> getProductsOrdenadosPorNome() {
+        List<Product> produtos = productService.getAllProducts();
+
+        ProductBST tree = new ProductBST();
+        for (Product p : produtos) {
+            tree.insert(p);
+        }
+
+        List<Product> ordenados = tree.inOrderTraversal();
+        List<ProductResponse> response = ordenados.stream()
+            .map(ProductResponse::new)
+            .collect(Collectors.toList());
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/buscar-bst")
+    public ResponseEntity<?> buscarProdutoPorNomeNaArvore(@RequestParam String nome) {
+        List<Product> produtos = productService.getAllProducts();
+        ProductBST tree = new ProductBST();
+        for (Product p : produtos) {
+            tree.insert(p);
+        }
+
+        Product encontrado = tree.search(nome);
+        if (encontrado != null) {
+            return ResponseEntity.ok(new ProductResponse(encontrado));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não encontrado: " + nome);
+        }
     }
 }
