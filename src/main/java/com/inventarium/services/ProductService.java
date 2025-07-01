@@ -2,6 +2,7 @@
 package com.inventarium.services;
 
 import com.inventarium.models.Product;
+import com.inventarium.models.Transaction;
 import com.inventarium.repositories.ProductRepository;
 import com.inventarium.repositories.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,11 +53,9 @@ public class ProductService {
         Product product = productRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Produto não encontrado com id: " + id));
         
-        // Verificar se existem transações associadas
-        long transactionCount = transactionRepository.countByProductId(id);
-        if (transactionCount > 0) {
-            throw new RuntimeException("Não é possível excluir o produto. Existem " + 
-                transactionCount + " transações associadas a este produto.");
+        List<Transaction> associatedTransactions = transactionRepository.findByProductId(id);
+        if (!associatedTransactions.isEmpty()) {
+            transactionRepository.deleteAll(associatedTransactions);
         }
         
         productRepository.delete(product);

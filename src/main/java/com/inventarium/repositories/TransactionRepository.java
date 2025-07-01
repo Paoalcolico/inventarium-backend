@@ -11,6 +11,7 @@ import java.util.List;
 
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
+    List<Transaction> findByProductId(Long productId);
     
     List<Transaction> findByProductIdOrderByDateDesc(Long productId);
     
