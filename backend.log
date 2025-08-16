@@ -1,0 +1,38 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.0)
+
+2025-08-14T22:06:08.807-03:00  INFO 1201533 --- [inventarium] [           main] com.inventarium.InventariumApplication   : Starting InventariumApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1201533 (/home/fabio/Documents/dev/Projeto/inventarium-backend/target/inventory-management-0.0.1-SNAPSHOT.jar started by fabio in /home/fabio/Documents/dev/Projeto/inventarium-backend)
+2025-08-14T22:06:08.811-03:00  INFO 1201533 --- [inventarium] [           main] com.inventarium.InventariumApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-08-14T22:06:09.919-03:00  INFO 1201533 --- [inventarium] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-14T22:06:09.984-03:00  INFO 1201533 --- [inventarium] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 55 ms. Found 3 JPA repository interfaces.
+2025-08-14T22:06:10.718-03:00  INFO 1201533 --- [inventarium] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 4000 (http)
+2025-08-14T22:06:10.730-03:00  INFO 1201533 --- [inventarium] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-14T22:06:10.730-03:00  INFO 1201533 --- [inventarium] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2025-08-14T22:06:10.765-03:00  INFO 1201533 --- [inventarium] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-14T22:06:10.766-03:00  INFO 1201533 --- [inventarium] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1866 ms
+2025-08-14T22:06:10.971-03:00  INFO 1201533 --- [inventarium] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-14T22:06:11.039-03:00  INFO 1201533 --- [inventarium] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2025-08-14T22:06:11.100-03:00  INFO 1201533 --- [inventarium] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-08-14T22:06:11.389-03:00  INFO 1201533 --- [inventarium] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-14T22:06:11.416-03:00  INFO 1201533 --- [inventarium] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-08-14T22:06:11.644-03:00  INFO 1201533 --- [inventarium] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@33de7f3d
+2025-08-14T22:06:11.647-03:00  INFO 1201533 --- [inventarium] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-08-14T22:06:11.706-03:00  WARN 1201533 --- [inventarium] [           main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-14T22:06:12.418-03:00  INFO 1201533 --- [inventarium] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-08-14T22:06:12.421-03:00  INFO 1201533 --- [inventarium] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-14T22:06:12.782-03:00  INFO 1201533 --- [inventarium] [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-08-14T22:06:13.561-03:00  WARN 1201533 --- [inventarium] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-14T22:06:14.078-03:00  INFO 1201533 --- [inventarium] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 4000 (http) with context path ''
+2025-08-14T22:06:14.104-03:00  INFO 1201533 --- [inventarium] [           main] com.inventarium.InventariumApplication   : Started InventariumApplication in 5.708 seconds (process running for 6.401)
+2025-08-14T22:06:20.885-03:00  INFO 1201533 --- [inventarium] [nio-4000-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-14T22:06:20.885-03:00  INFO 1201533 --- [inventarium] [nio-4000-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-08-14T22:06:20.886-03:00  INFO 1201533 --- [inventarium] [nio-4000-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-08-14T22:09:05.475-03:00  INFO 1201533 --- [inventarium] [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-14T22:09:05.478-03:00  INFO 1201533 --- [inventarium] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-08-14T22:09:05.495-03:00  INFO 1201533 --- [inventarium] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

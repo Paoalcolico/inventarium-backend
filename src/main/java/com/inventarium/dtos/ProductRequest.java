@@ -10,8 +10,8 @@ public class ProductRequest {
     @NotBlank(message = "Código do fabricante é obrigatório")
     private String manufacturerCode;
     
-    @NotBlank(message = "Marca é obrigatória")
-    private String brand;
+    @NotNull(message = "Marca é obrigatória")
+    private Long brand;
     
     private String stockLocation;
     
@@ -34,7 +34,7 @@ public class ProductRequest {
     // Construtores
     public ProductRequest() {}
     
-    public ProductRequest(String manufacturerCode, String brand, String stockLocation, 
+    public ProductRequest(String manufacturerCode, Long brand, String stockLocation, 
                          Integer warrantyMonths, String name, String description, 
                          BigDecimal unitPrice, Integer quantity) {
         this.manufacturerCode = manufacturerCode;
@@ -56,11 +56,11 @@ public class ProductRequest {
         this.manufacturerCode = manufacturerCode;
     }
     
-    public String getBrand() {
+    public Long getBrand() {
         return brand;
     }
     
-    public void setBrand(String brand) {
+    public void setBrand(Long brand) {
         this.brand = brand;
     }
     
@@ -118,7 +118,7 @@ public class ProductRequest {
             this.manufacturerCode,
             this.brand,
             this.stockLocation,
-            this.warrantyMonths,
+            this.warrantyMonths != null ? this.warrantyMonths.toString() : null,
             this.name,
             this.description,
             this.unitPrice,

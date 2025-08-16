@@ -1,4 +1,5 @@
 
+/*
 package com.inventarium.services;
 
 import com.inventarium.models.Product;
@@ -128,3 +129,4 @@ public class TransactionService {
         return orphanTransactions.size();
     }
 }
+*/

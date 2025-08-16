@@ -12,7 +12,7 @@ public class TransactionRequest {
     private String productName;
     
     @NotNull(message = "Tipo da transação é obrigatório")
-    private TransactionType type;
+    private String type; // Aceita string para facilitar frontend
     
     @NotNull(message = "Quantidade é obrigatória")
     @Min(value = 1, message = "Quantidade deve ser maior que zero")
@@ -31,8 +31,13 @@ public class TransactionRequest {
     public String getProductName() { return productName; }
     public void setProductName(String productName) { this.productName = productName; }
     
-    public TransactionType getType() { return type; }
-    public void setType(TransactionType type) { this.type = type; }
+    public String getType() { return type; }
+    public void setType(String type) { this.type = type; }
+    
+    // Método helper para converter string para enum
+    public TransactionType getTransactionType() {
+        return TransactionType.valueOf(type.toUpperCase());
+    }
     
     public Integer getQuantity() { return quantity; }
     public void setQuantity(Integer quantity) { this.quantity = quantity; }

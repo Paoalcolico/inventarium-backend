@@ -11,9 +11,10 @@ import java.util.List;
 
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
-    List<Transaction> findByProductId(Long productId);
-    
-    List<Transaction> findByProductIdOrderByDateDesc(Long productId);
+    // Métodos removidos temporariamente pois não temos productId na nova Transaction
+    // List<Transaction> findByProductId(Long productId);
+    // List<Transaction> findByProductIdOrderByDateDesc(Long productId);
+    // long countByProductId(Long productId);
     
     List<Transaction> findByTypeOrderByDateDesc(TransactionType type);
     
@@ -22,6 +23,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
                                        @Param("endDate") LocalDateTime endDate);
     
     List<Transaction> findAllByOrderByDateDesc();
-
-    long countByProductId(Long productId);
+    
+    List<Transaction> findByUsuarioId(Long usuarioId);
 }

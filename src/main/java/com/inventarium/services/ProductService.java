@@ -38,7 +38,7 @@ public class ProductService {
             .orElseThrow(() -> new RuntimeException("Produto não encontrado com id: " + id));
         
         product.setManufacturerCode(productDetails.getManufacturerCode());
-        product.setBrand(productDetails.getBrand());
+        product.setMarcaId(productDetails.getMarcaId());
         product.setStockLocation(productDetails.getStockLocation());
         product.setWarrantyMonths(productDetails.getWarrantyMonths());
         product.setName(productDetails.getName());
@@ -53,10 +53,11 @@ public class ProductService {
         Product product = productRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Produto não encontrado com id: " + id));
         
-        List<Transaction> associatedTransactions = transactionRepository.findByProductId(id);
-        if (!associatedTransactions.isEmpty()) {
-            transactionRepository.deleteAll(associatedTransactions);
-        }
+        // Comentado temporariamente - precisa ser refatorado para nova estrutura
+        // List<Transaction> associatedTransactions = transactionRepository.findByProductId(id);
+        // if (!associatedTransactions.isEmpty()) {
+        //     transactionRepository.deleteAll(associatedTransactions);
+        // }
         
         productRepository.delete(product);
     }

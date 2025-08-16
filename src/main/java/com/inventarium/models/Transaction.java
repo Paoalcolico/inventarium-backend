@@ -1,45 +1,35 @@
 package com.inventarium.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "transactions")
+@Table(name = "transacao")
 public class Transaction {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
-    
-    @Column(name = "product_name", nullable = false)
-    private String productName;
-    
+    @Column(name = "tipo", nullable = false, length = 10)
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private TransactionType type;
     
-    @Column(nullable = false)
-    @Min(value = 1, message = "Quantidade deve ser maior que zero")
-    private Integer quantity;
-    
-    @Column(name = "unit_price", precision = 10, scale = 2, nullable = false)
-    @DecimalMin(value = "0.0", inclusive = false, message = "Preço deve ser maior que zero")
-    private BigDecimal unitPrice;
-    
-    @Column(name = "total_value", precision = 10, scale = 2, nullable = false)
+    @Column(name = "valor_total", precision = 12, scale = 2, nullable = false)
     private BigDecimal totalValue;
     
-    @Column(nullable = false)
+    @Column(name = "data_transacao", nullable = false)
     private LocalDateTime date;
     
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "usuario_id", nullable = false)
+    private Long usuarioId;
+    
+    @Column(name = "observacoes", columnDefinition = "TEXT")
     private String description;
+    
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
     
     public enum TransactionType {
         ENTRADA, SAIDA
@@ -50,53 +40,29 @@ public class Transaction {
         if (date == null) {
             date = LocalDateTime.now();
         }
-        calculateTotalValue();
-    }
-    
-    @PreUpdate
-    protected void onUpdate() {
-        calculateTotalValue();
-    }
-    
-    private void calculateTotalValue() {
-        if (quantity != null && unitPrice != null) {
-            totalValue = unitPrice.multiply(BigDecimal.valueOf(quantity));
+        if (createdAt == null) {
+            createdAt = LocalDateTime.now();
         }
     }
     
     // Construtores
     public Transaction() {}
     
-    public Transaction(Product product, String productName, TransactionType type, 
-                      Integer quantity, BigDecimal unitPrice, String description) {
-        this.product = product;
-        this.productName = productName;
+    public Transaction(TransactionType type, BigDecimal totalValue, Long usuarioId, String description) {
         this.type = type;
-        this.quantity = quantity;
-        this.unitPrice = unitPrice;
+        this.totalValue = totalValue;
+        this.usuarioId = usuarioId;
         this.description = description;
         this.date = LocalDateTime.now();
-        calculateTotalValue();
+        this.createdAt = LocalDateTime.now();
     }
     
     // Getters e Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     
-    public Product getProduct() { return product; }
-    public void setProduct(Product product) { this.product = product; }
-    
-    public String getProductName() { return productName; }
-    public void setProductName(String productName) { this.productName = productName; }
-    
     public TransactionType getType() { return type; }
     public void setType(TransactionType type) { this.type = type; }
-    
-    public Integer getQuantity() { return quantity; }
-    public void setQuantity(Integer quantity) { this.quantity = quantity; }
-    
-    public BigDecimal getUnitPrice() { return unitPrice; }
-    public void setUnitPrice(BigDecimal unitPrice) { this.unitPrice = unitPrice; }
     
     public BigDecimal getTotalValue() { return totalValue; }
     public void setTotalValue(BigDecimal totalValue) { this.totalValue = totalValue; }
@@ -104,6 +70,12 @@ public class Transaction {
     public LocalDateTime getDate() { return date; }
     public void setDate(LocalDateTime date) { this.date = date; }
     
+    public Long getUsuarioId() { return usuarioId; }
+    public void setUsuarioId(Long usuarioId) { this.usuarioId = usuarioId; }
+    
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
+    
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }

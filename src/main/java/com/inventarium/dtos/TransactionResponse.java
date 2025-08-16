@@ -19,12 +19,12 @@ public class TransactionResponse {
     // Construtor que converte de Transaction para TransactionResponse
     public TransactionResponse(Transaction transaction) {
         this.id = transaction.getId();
-        this.productId = transaction.getProduct().getId();
-        this.productName = transaction.getProductName();
-        this.productBrand = transaction.getProduct().getBrand(); // Dados do produto relacionado
+        this.productId = transaction.getUsuarioId(); // Para enquanto, vou usar usuarioId como referência
+        this.productName = "Produto"; // Temporário
+        this.productBrand = "Marca"; // Temporário
         this.type = transaction.getType().toString();
-        this.quantity = transaction.getQuantity();
-        this.unitPrice = transaction.getUnitPrice();
+        this.quantity = 1; // Temporário - não temos quantity na nova Transaction
+        this.unitPrice = transaction.getTotalValue();
         this.totalValue = transaction.getTotalValue();
         this.date = transaction.getDate();
         this.description = transaction.getDescription();

@@ -6,40 +6,38 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "products")
+@Table(name = "produto")
 public class Product {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name = "manufacturer_code", unique = true, nullable = false)
+    @Column(name = "codigo_fabricante", nullable = false)
     @NotBlank(message = "Código do fabricante é obrigatório")
     private String manufacturerCode;
     
-    @Column(nullable = false)
-    @NotBlank(message = "Marca é obrigatória")
-    private String brand;
+    @Column(name = "marca_id", nullable = false)
+    private Long marcaId;
     
-    @Column(name = "stock_location")
+    @Column(name = "localizacao")
     private String stockLocation;
     
-    @Column(name = "warranty_months")
-    @Min(value = 0, message = "Garantia deve ser maior ou igual a 0")
-    private Integer warrantyMonths;
+    @Column(name = "garantia")
+    private String warrantyMonths;
     
-    @Column(nullable = false)
+    @Column(name = "nome", nullable = false)
     @NotBlank(message = "Nome é obrigatório")
     private String name;
     
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "descricao", columnDefinition = "TEXT")
     private String description;
     
-    @Column(name = "unit_price", precision = 10, scale = 2, nullable = false)
+    @Column(name = "valor_unitario", precision = 10, scale = 2, nullable = false)
     @DecimalMin(value = "0.0", inclusive = false, message = "Preço deve ser maior que zero")
     private BigDecimal unitPrice;
     
-    @Column(nullable = false)
+    @Column(name = "quantidade", nullable = false)
     @Min(value = 0, message = "Quantidade deve ser maior ou igual a 0")
     private Integer quantity;
     
@@ -63,11 +61,11 @@ public class Product {
     // Construtores
     public Product() {}
     
-    public Product(String manufacturerCode, String brand, String stockLocation, 
-                   Integer warrantyMonths, String name, String description, 
+    public Product(String manufacturerCode, Long marcaId, String stockLocation, 
+                   String warrantyMonths, String name, String description, 
                    BigDecimal unitPrice, Integer quantity) {
         this.manufacturerCode = manufacturerCode;
-        this.brand = brand;
+        this.marcaId = marcaId;
         this.stockLocation = stockLocation;
         this.warrantyMonths = warrantyMonths;
         this.name = name;
@@ -83,14 +81,14 @@ public class Product {
     public String getManufacturerCode() { return manufacturerCode; }
     public void setManufacturerCode(String manufacturerCode) { this.manufacturerCode = manufacturerCode; }
     
-    public String getBrand() { return brand; }
-    public void setBrand(String brand) { this.brand = brand; }
+    public Long getMarcaId() { return marcaId; }
+    public void setMarcaId(Long marcaId) { this.marcaId = marcaId; }
     
     public String getStockLocation() { return stockLocation; }
     public void setStockLocation(String stockLocation) { this.stockLocation = stockLocation; }
     
-    public Integer getWarrantyMonths() { return warrantyMonths; }
-    public void setWarrantyMonths(Integer warrantyMonths) { this.warrantyMonths = warrantyMonths; }
+    public String getWarrantyMonths() { return warrantyMonths; }
+    public void setWarrantyMonths(String warrantyMonths) { this.warrantyMonths = warrantyMonths; }
     
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }

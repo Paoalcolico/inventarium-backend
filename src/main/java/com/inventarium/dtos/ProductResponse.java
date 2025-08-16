@@ -20,9 +20,22 @@ public class ProductResponse {
     public ProductResponse(Product product) {
         this.id = product.getId();
         this.manufacturerCode = product.getManufacturerCode();
-        this.brand = product.getBrand();
+        this.brand = product.getMarcaId() != null ? product.getMarcaId().toString() : null;
         this.stockLocation = product.getStockLocation();
-        this.warrantyMonths = product.getWarrantyMonths();
+        
+        // Extrair apenas números da string de garantia
+        this.warrantyMonths = null;
+        if (product.getWarrantyMonths() != null) {
+            try {
+                String warrantyStr = product.getWarrantyMonths().replaceAll("[^0-9]", "");
+                if (!warrantyStr.isEmpty()) {
+                    this.warrantyMonths = Integer.parseInt(warrantyStr);
+                }
+            } catch (NumberFormatException e) {
+                this.warrantyMonths = null;
+            }
+        }
+        
         this.name = product.getName();
         this.description = product.getDescription();
         this.unitPrice = product.getUnitPrice();

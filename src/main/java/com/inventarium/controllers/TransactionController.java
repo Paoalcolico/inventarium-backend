@@ -1,3 +1,4 @@
+/*
 package com.inventarium.controllers;
 
 import com.inventarium.dtos.TransactionRequest;
@@ -122,3 +123,4 @@ public class TransactionController {
         return ResponseEntity.ok(response);
     }
 }
+*/
