@@ -37,11 +37,11 @@ public class TransactionControllerSimple {
         try {
             // Converter TransactionRequest para Transaction
             Transaction transaction = new Transaction();
-            transaction.setType(request.getTransactionType()); // Usar método helper
-            transaction.setTotalValue(request.getUnitPrice().multiply(BigDecimal.valueOf(request.getQuantity())));
+            transaction.setType(request.getTransactionType());
+            transaction.setTotalValue(request.getTotalValue());
             transaction.setDate(LocalDateTime.now());
-            transaction.setUsuarioId(1L); // Usuario padrão por enquanto
-            transaction.setDescription(request.getDescription());
+            transaction.setUsuarioId(request.getUsuarioId() != null ? request.getUsuarioId() : 1L);
+            transaction.setObservacoes(request.getDescription());
             
             Transaction savedTransaction = transactionRepository.save(transaction);
             return ResponseEntity.ok(savedTransaction);

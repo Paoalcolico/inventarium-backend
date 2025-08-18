@@ -13,7 +13,7 @@ public class Transaction {
     private Long id;
     
     @Column(name = "tipo", nullable = false, length = 10)
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = TransactionTypeConverter.class)
     private TransactionType type;
     
     @Column(name = "valor_total", precision = 12, scale = 2, nullable = false)
@@ -26,13 +26,34 @@ public class Transaction {
     private Long usuarioId;
     
     @Column(name = "observacoes", columnDefinition = "TEXT")
-    private String description;
+    private String observacoes;
     
     @Column(name = "created_at")
     private LocalDateTime createdAt;
     
     public enum TransactionType {
-        ENTRADA, SAIDA
+        ENTRADA("entrada"), SAIDA("saida");
+        private final String value;
+        TransactionType(String value) { this.value = value; }
+        public String getValue() { return value; }
+        public static TransactionType fromValue(String value) {
+            for (TransactionType t : values()) {
+                if (t.value.equalsIgnoreCase(value)) return t;
+            }
+            throw new IllegalArgumentException("Tipo inválido: " + value);
+        }
+    }
+
+    @jakarta.persistence.Converter(autoApply = true)
+    public static class TransactionTypeConverter implements jakarta.persistence.AttributeConverter<TransactionType, String> {
+        @Override
+        public String convertToDatabaseColumn(TransactionType attribute) {
+            return attribute != null ? attribute.getValue() : null;
+        }
+        @Override
+        public TransactionType convertToEntityAttribute(String dbData) {
+            return dbData != null ? TransactionType.fromValue(dbData) : null;
+        }
     }
     
     @PrePersist
@@ -48,11 +69,11 @@ public class Transaction {
     // Construtores
     public Transaction() {}
     
-    public Transaction(TransactionType type, BigDecimal totalValue, Long usuarioId, String description) {
+    public Transaction(TransactionType type, BigDecimal totalValue, Long usuarioId, String observacoes) {
         this.type = type;
         this.totalValue = totalValue;
         this.usuarioId = usuarioId;
-        this.description = description;
+        this.observacoes = observacoes;
         this.date = LocalDateTime.now();
         this.createdAt = LocalDateTime.now();
     }
@@ -73,8 +94,8 @@ public class Transaction {
     public Long getUsuarioId() { return usuarioId; }
     public void setUsuarioId(Long usuarioId) { this.usuarioId = usuarioId; }
     
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+    public String getObservacoes() { return observacoes; }
+    public void setObservacoes(String observacoes) { this.observacoes = observacoes; }
     
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }

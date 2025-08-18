@@ -50,38 +50,12 @@ public class TransactionController {
     @PostMapping
     public ResponseEntity<?> createTransaction(@Valid @RequestBody TransactionRequest request) {
         try {
-            Optional<Product> productOpt = productService.getProductById(request.getProductId());
-            if (productOpt.isEmpty()) {
-                Map<String, String> error = Map.of(
-                    "error", "PRODUCT_NOT_FOUND",
-                    "message", "Produto não encontrado"
-                );
-                return ResponseEntity.badRequest().body(error);
-            }
-            
-            Product product = productOpt.get();
-            
-            // Verificar estoque para saída
-            if (request.getType() == TransactionType.SAIDA && 
-                product.getQuantity() < request.getQuantity()) {
-                Map<String, Object> error = Map.of(
-                    "error", "INSUFFICIENT_STOCK",
-                    "message", "Estoque insuficiente",
-                    "available", product.getQuantity(),
-                    "requested", request.getQuantity()
-                );
-                return ResponseEntity.badRequest().body(error);
-            }
-            
             Transaction transaction = new Transaction(
-                product,
-                request.getProductName() != null ? request.getProductName() : product.getName(),
-                request.getType(),
-                request.getQuantity(),
-                request.getUnitPrice(),
+                Transaction.TransactionType.valueOf(request.getType().toUpperCase()),
+                request.getTotalValue(),
+                request.getUsuarioId(),
                 request.getDescription()
             );
-            
             Transaction savedTransaction = transactionService.saveTransaction(transaction);
             TransactionResponse response = new TransactionResponse(savedTransaction);
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
