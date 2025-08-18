@@ -44,7 +44,7 @@ public class Product {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
     
-    @Column(name = "updated_at")
+    @Column(name = "edited_at")
     private LocalDateTime updatedAt;
     
     @PrePersist

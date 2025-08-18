@@ -15,7 +15,7 @@ public class Marca {
     @Column(name = "created_at")
     private java.time.LocalDateTime createdAt;
     
-    @Column(name = "updated_at")
+    @Column(name = "edited_at")
     private java.time.LocalDateTime updatedAt;
     
     // Constructors
