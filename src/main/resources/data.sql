@@ -2,18 +2,18 @@
 
 -- Papéis do sistema
 INSERT IGNORE INTO papel (id, nome, descricao, nivel) VALUES
-(1, 'ADMIN', 'Administrador do sistema com acesso total', 1),
-(2, 'GERENTE', 'Gerente com acesso a relatórios e configurações', 2),
-(3, 'OPERADOR', 'Operador de estoque com acesso a transações', 3),
-(4, 'VISUALIZADOR', 'Usuário com acesso apenas para visualização', 4);
+(1, 'ADMIN', 'Administrador', 1),
+(2, 'GERENTE', 'Gerente', 2),
+(3, 'SUPERVISOR', 'Supervisor', 3),
+(4, 'FUNCIONARIO', 'Funcionário', 4);
 
--- Usuários iniciais (senha: admin123)
-INSERT IGNORE INTO usuario (id, nome, username, senha_hash, papel_id) VALUES
-(1, 'Administrador', 'admin', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2uheWG/igi.', 1),
-(2, 'João Silva', 'joao.silva', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2uheWG/igi.', 2),
-(3, 'Maria Santos', 'maria.santos', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2uheWG/igi.', 3),
-(4, 'Pedro Oliveira', 'pedro.oliveira', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2uheWG/igi.', 3),
-(5, 'Ana Costa', 'ana.costa', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2uheWG/igi.', 4);
+-- Usuários iniciais (senha: 123456)
+DELETE FROM usuario WHERE id IN (1, 2, 3, 4, 5);
+INSERT INTO usuario (id, nome, username, senha_hash, papel_id) VALUES
+(1, 'Administrador', 'admin', '123456', 1),
+(2, 'Gerente Geral', 'gerente', '123456', 2),
+(3, 'Supervisor Estoque', 'supervisor', '123456', 3),
+(4, 'Funcionário Operacional', 'funcionario', '123456', 4);
 
 -- Marcas
 INSERT IGNORE INTO marca (id, nome) VALUES
