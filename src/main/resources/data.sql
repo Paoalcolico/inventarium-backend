@@ -7,13 +7,13 @@ INSERT IGNORE INTO papel (id, nome, descricao, nivel) VALUES
 (3, 'SUPERVISOR', 'Supervisor', 3),
 (4, 'FUNCIONARIO', 'Funcionário', 4);
 
--- Usuários iniciais (senha: 123456)
+-- Usuários iniciais (senha: 123456 - criptografada com BCrypt)
 DELETE FROM usuario WHERE id IN (1, 2, 3, 4, 5);
 INSERT INTO usuario (id, nome, username, senha_hash, papel_id) VALUES
-(1, 'Administrador', 'admin', '123456', 1),
-(2, 'Gerente Geral', 'gerente', '123456', 2),
-(3, 'Supervisor Estoque', 'supervisor', '123456', 3),
-(4, 'Funcionário Operacional', 'funcionario', '123456', 4);
+(1, 'Administrador', 'admin', '$2a$10$cOuexoZNBHb8Mvf7s.zqnuI7nZQdGBXSwfcQ7u9mHksC4I.Ri4xlS', 1),
+(2, 'Gerente Geral', 'gerente', '$2a$10$tWDJ5muZAtZsJoBBnlbbaOPjDpypkNT500xcWysvUsDqFbQuDtITm', 2),
+(3, 'Supervisor Estoque', 'supervisor', '$2a$10$EDfM821nbiDChe5APZC9cextbVrqRPZlg30ExMgq6jY2ziNR/XYJ2', 3),
+(4, 'Funcionário Operacional', 'funcionario', '$2a$10$ijKz5tL2ropFZdYSDIzKLuJABO3uUp7/fmMx1DtxPipgT.Zd8sLlK', 4);
 
 -- Marcas
 INSERT IGNORE INTO marca (id, nome) VALUES

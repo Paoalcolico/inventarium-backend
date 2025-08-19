@@ -13,6 +13,9 @@ public class AuthService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+    
+    @Autowired
+    private PasswordService passwordService;
 
     public LoginResponse authenticate(String username, String password) {
         try {
@@ -24,8 +27,8 @@ public class AuthService {
 
             Usuario usuario = usuarioOpt.get();
             
-            // Verificar senha simples (123456 para todos)
-            if (!password.equals("123456")) {
+            // Verificar senha usando BCrypt
+            if (!passwordService.verifyPassword(password, usuario.getSenhaHash())) {
                 return new LoginResponse(false, "Senha incorreta");
             }
 
